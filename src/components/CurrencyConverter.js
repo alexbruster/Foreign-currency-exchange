@@ -17,7 +17,7 @@ const CurrencyConverter = () => {
   const[errorCurr, setErrorCurr] = useState(false);
   const[errorAmount, setErrorAmount] = useState(false);
   
-  const{selectedPair, setSelectedPair} = useContext(SelectedPairContext)
+  const{selectedPair, setSelectedPair} = useContext(SelectedPairContext);
   const[curr, SelectCurr] = useSelector(errorCurr);
 
   const history = useHistory();
@@ -79,7 +79,10 @@ const CurrencyConverter = () => {
     setStorage();
     setErrorCurr(false);
     setErrorAmount(false);
-    history.push('/detail');
+    history.push({
+      pathname: `/detail/${selectedPair.order}`,
+      state: {operation: selectedPair}
+    });
   }
 
   const setStorage = () => {

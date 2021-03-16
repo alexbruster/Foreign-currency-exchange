@@ -1,10 +1,10 @@
-import { useHistory } from 'react-router';
-
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { useState } from 'react';
+import { Redirect, useHistory } from 'react-router';
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,7 +13,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { useState } from 'react';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -66,8 +65,15 @@ const ApplicationList = () => {
   }
 
   const handleChange = e => {
+    const operation = operations.filter(op => {
+      return (op.order === e.target.id)
+    });
+
     if(e.target.value === 'View') {
-      history.push('/detail');
+      history.push({
+        pathname: `/detail/${e.target.id}`,
+        state: {operation: operation[0]}
+      });
     } else if((e.target.value === 'Delete')) {
       handleDelete(e);
     }
@@ -140,7 +146,7 @@ const ApplicationList = () => {
             </Table>
           </TableContainer>)
         : 
-        null
+        <h3 className="no-operations">There are no registered operations</h3>
       }
     </div>
   );

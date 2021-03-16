@@ -1,6 +1,6 @@
 # Description
 
-Foreign currency exchange application. It is made to practice with the React router, Hooks and data request to an API (https://exchangeratesapi.io/).
+Foreign currency exchange application. It is made to practice with the React router, Hooks, material-UI and data request to an API (https://exchangeratesapi.io/).
 
 ## Available Scripts
 

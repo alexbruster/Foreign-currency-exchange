@@ -27,7 +27,7 @@ function App() {
                   <Route exact path="/"><Home /></Route>
                   <Route path="/list"><ApplicationList /></Route>
                   <Route path="/request"><CurrencyConverter /></Route>
-                  <Route path="/detail"><ExchangeDetail /></Route>
+                  <Route path="/detail/:id"><ExchangeDetail /></Route>
                 </Switch>
             </Grid>
           </Grid>
