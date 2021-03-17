@@ -9,6 +9,7 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
+import UseStorage from "../hooks/useStorage";
 
 const CurrencyConverter = () => {
 
@@ -76,17 +77,13 @@ const CurrencyConverter = () => {
       setErrorAmount(true);
       return;
     }
-    setStorage();
+    UseStorage.setPair(`${selectedPair.order}`, JSON.stringify(selectedPair))
     setErrorCurr(false);
     setErrorAmount(false);
     history.push({
       pathname: `/detail/${selectedPair.order}`,
       state: {operation: selectedPair}
     });
-  }
-
-  const setStorage = () => {
-    sessionStorage.setItem(`${selectedPair.order}`, JSON.stringify(selectedPair))
   }
 
   return (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
@@ -13,6 +13,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import UseStorage from '../hooks/useStorage';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -51,14 +52,10 @@ const ApplicationList = () => {
 
   const classes = useStyles();
   const history = useHistory()
-  let operations = [];
-  let opArray = newOps.length > 0 ? newOps : operations;
 
-  for(let i=0; i<sessionStorage.length; i++) {
-    let key = sessionStorage.key(i);
-    let operation = JSON.parse(sessionStorage.getItem(key));
-    operations.push(operation); 
-  }
+  let operations = UseStorage.getPair();
+
+  let opArray = newOps.length > 0 ? newOps : operations;
 
   const handleClick = () => {
    history.push('/request');
@@ -83,7 +80,7 @@ const ApplicationList = () => {
     const newOperations = operations.filter(op => {
       return (op.order !== e.target.id)
     })
-    sessionStorage.removeItem(e.target.id);
+    UseStorage.removePair(e.target.id);
     operations = newOperations;
     setNewOps(newOperations);
   }
